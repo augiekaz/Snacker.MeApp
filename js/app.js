@@ -35,7 +35,11 @@ getFood();
 angular.module('starter', ['ionic', 'ngTouch', 'ionic.contrib.ui.cards'])
 
 
+
+
 .config(function($stateProvider, $urlRouterProvider) {
+
+
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -67,7 +71,8 @@ angular.module('starter', ['ionic', 'ngTouch', 'ionic.contrib.ui.cards'])
   }
 })
 
-.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate) {
+
+.controller('CardsCtrl', function($scope, $ionicSwipeCardDelegate, $location) {
   cardTypes = [
     { title: 'Loading  food pics...', image: 'img/pic.png' },
     { title: 'Loading  food pics...', image: 'img/pic.png' },
@@ -91,6 +96,31 @@ angular.module('starter', ['ionic', 'ngTouch', 'ionic.contrib.ui.cards'])
     newCard.id = Math.random();
     $scope.cards.push(angular.extend({}, newCard));
   }
+
+
+  $scope.goToNewRoom = function() {
+    $location.path('/about');
+    $scope.toggleSideMenu();
+  };
+  
+  $scope.goToAbout = function() {
+    $location.path('/about');
+    $scope.toggleSideMenu();
+  };
+  
+  $scope.goToHome = function() {
+    $location.path('/home');
+  };  
+    
+  $scope.toggleSideMenu = function() {
+    $scope.sideMenuController.toggleLeft();
+  };
+
+
+})
+
+.controller('AppCtrl', function($scope, $location) {
+ 
 })
 
 .controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
