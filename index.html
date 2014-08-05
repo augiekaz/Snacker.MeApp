@@ -7,6 +7,7 @@
 
     <!-- ionic css -->
     <link href="lib/css/ionic.css" rel="stylesheet">
+     <link href="css/sidemenu.css" rel="stylesheet">
 
     <!-- your app's css -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic" rel="stylesheet" type="text/css">
@@ -36,14 +37,66 @@
   <!-- 
     'starter' is the name of this angular module (js/app.js)
   -->
-  <body ng-app="starter" animation="slide-left-right-ios7" no-scroll>
+  <body ng-app="starter" animation="slide-left-right-ios7" no-scroll ng-controller="AppCtrl">
+
+
+
+
+    
+
+
     <pane ng-controller="CardsCtrl">
-      <header-bar type="bar-transparent" title="'Snacker'"></header-bar>
+       <header class="bar bar-header bar-calm">
+    <button class="button button-icon" ng-click="toggleSideMenu()"><i class="icon ion-navicon"></i></button>
+    <h1 class="title">Snacker</h1>
+    <button class="button button-icon" ng-click="goToNewRoom()"><i class="icon ion-plus"></i></button>
+  </header>
+<side-menus>
+      <pane side-menu-content>
+        <pane nav-router animation="slide-left-right-ios7">
+          <ng-view></ng-view>
+        </pane>
+      </pane>
+  
+      <side-menu side="left">
+        <header class="bar bar-header bar-calm">
+          <h1 class="title">Menu</h1>
+        </header>
+        <content has-header="true">
+          <ul class="list">
+            <a ng-click="toggleSideMenu()" class="item">
+            <i class="icon ion-android-locate" style="font-size: 1.3rem; color: #43cee6;"></i>
+             &nbsp; &nbsp; all chats around
+            </a>
+            <a ng-click="goToCards()" class="item">
+            <i class="icon ion-flash" style="font-size: 1.3rem; color: #43cee6;"></i>
+             &nbsp; &nbsp; find a chat
+            </a> 
+            <a ng-click="goToNewRoom()" class="item">
+              <i class="icon ion-plus-round" style="font-size: 1.3rem; color: #43cee6;"></i>
+             &nbsp; &nbsp; create a chat  
+            </a>
+            <a ng-click="goToLaunch()" class="item">
+            <i class="icon ion-android-contact" style="font-size: 1.3rem; color: #43cee6;"></i>
+             &nbsp; &nbsp; refresh search
+            </a>     
+            <a ng-click="goToAbout()" class="item">
+            <i class="icon ion-ionic" style="font-size: 1.3rem; color: #43cee6;"></i>
+             &nbsp; &nbsp; about chaffy
+            </a>  
+          </ul>
+        </content>
+      </side-menu>
+    </side-menus>   
+
 
       <swipe-cards>
         <swipe-card on-swipe="cardSwiped()" id="start-card">
           Swipe down for food near you
         </swipe-card>
+
+
+
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe="cardSwiped($index)">
           <div ng-controller="CardCtrl">
             <div class="title">
@@ -60,5 +113,7 @@
         </swipe-card>
       </swipe-cards>
     </pane>
+
+
   </body>
 </html>
